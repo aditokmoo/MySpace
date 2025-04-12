@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "myspace-mobile-app",
-    "slug": "myspace-mobile-app",
+    "slug": "myspace",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -36,6 +36,15 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "445dfdc0-5ade-4c71-b672-8ba313b95c25"
+      }
+    },
+    "owner": "adito18"
   }
 }
