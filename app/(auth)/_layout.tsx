@@ -3,13 +3,21 @@ import { Tabs } from 'expo-router'
 
 const _layout = () => {
     return (
-        <Tabs>
+        <Tabs
+            screenOptions={{
+                headerShown: false,
+                tabBarShowLabel: false,
+                tabBarStyle: {
+                    display: 'none'
+                }
+            }}
+        >
             <Tabs.Screen
-                name="Login"
+                name="login"
                 options={{ headerShown: false }}
             />
             <Tabs.Screen
-                name="Register"
+                name="register"
                 options={{ headerShown: false }}
             />
         </Tabs>
