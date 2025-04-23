@@ -1,8 +1,10 @@
-export const fields = [
+import { LoginField } from "@/types/auth";
+
+export const fields: LoginField[] = [
     {
         id: 1,
-        name: 'email',
-        placeholder: 'Email',
+        name: 'identifier',
+        placeholder: 'Email or Name',
         secureTextEntry: false,
     },
     {
@@ -11,4 +13,4 @@ export const fields = [
         placeholder: 'Password',
         secureTextEntry: true,
     },
-]
+];

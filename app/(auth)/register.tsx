@@ -1,13 +1,25 @@
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
+import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { Controller, useForm } from 'react-hook-form';
 import Input from '@/components/Input';
 import { Link } from 'expo-router';
 import { FontAwesome } from '@expo/vector-icons';
 import { fields } from '@/constants/register';
+import { UserCredentials } from '@/types/auth';
+import { useAuthActions } from '@/modules/auth/hooks/useAuthActions';
+import { ActivityIndicator } from 'react-native';
 
 export default function Register() {
-    const { control } = useForm();
+    const { control, handleSubmit } = useForm<UserCredentials>({
+        defaultValues: {
+            email: '',
+            name: '',
+            password: '',
+        }
+    });
+    const { signUp, isSigningUp } = useAuthActions();
+
+    const handleRegister = (data: any) => signUp(data);
 
     return (
         <ScrollView
@@ -35,10 +47,18 @@ export default function Register() {
                 />
             ))}
 
-            <TouchableOpacity className="bg-blue-600 px-6 py-4 rounded-xl mt-4">
-                <Text className="text-white text-center font-semibold text-base">
-                    Create account
-                </Text>
+            <TouchableOpacity
+                disabled={isSigningUp}
+                onPress={handleSubmit((data) => handleRegister(data))}
+                className={`bg-blue-600 px-6 py-4 rounded-xl mt-4 ${isSigningUp ? 'opacity-50' : ''}`}
+            >
+                {isSigningUp ? (
+                    <ActivityIndicator size="small" color="#ffffff" />
+                ) : (
+                    <Text className="text-white text-center font-semibold text-base">
+                        Create account
+                    </Text>
+                )}
             </TouchableOpacity>
 
             <Text className="text-center mt-12 text-sm">

@@ -1,13 +1,19 @@
-import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
+import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { Controller, useForm } from 'react-hook-form'
 import Input from '@/components/Input'
 import { fields } from '@/constants/login'
 import { FontAwesome } from '@expo/vector-icons'
 import { Link } from 'expo-router'
+import { LoginCredentials } from '@/types/auth'
 
 export default function Login() {
-    const { control } = useForm();
+    const { handleSubmit, control } = useForm<LoginCredentials>({
+        defaultValues: {
+            identifier: '',
+            password: '',
+        }
+    });
 
     return (
         <ScrollView
@@ -35,7 +41,7 @@ export default function Login() {
                 />
             ))}
 
-            <TouchableOpacity className="bg-blue-600 px-6 py-4 rounded-xl mt-4">
+            <TouchableOpacity className="bg-blue-600 px-6 py-4 rounded-xl mt-4" onPress={handleSubmit((data) => console.log(data))}>
                 <Text className="text-white text-center font-semibold text-base">
                     Login
                 </Text>

@@ -1,7 +1,9 @@
-export const fields = [
+import { RegisterField } from "@/types/auth";
+
+export const fields: RegisterField[] = [
     {
         id: 1,
-        name: 'Name',
+        name: 'name',
         placeholder: 'Name',
         secureTextEntry: false,
     },
