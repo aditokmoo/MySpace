@@ -1,11 +1,11 @@
 export enum QueryKeysType {
     Local = 1,
-    Server,
+    Server = 2,
 }
 
 export enum UpdateType {
     Static = 1,
-    WebSocket,
+    WebSocket = 2,
 }
 
 export interface localQueryKeysTypes {
