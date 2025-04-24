@@ -3,8 +3,8 @@ import { LoginField } from "@/types/auth";
 export const fields: LoginField[] = [
     {
         id: 1,
-        name: 'identifier',
-        placeholder: 'Email or Name',
+        name: 'email',
+        placeholder: 'Email',
         secureTextEntry: false,
     },
     {

@@ -1,8 +1,8 @@
 import React from 'react'
-import { Tabs } from 'expo-router'
-import { Image, ImageBackground, Text, View } from 'react-native'
-import { images } from '@/constants/images'
+import { Redirect, Tabs } from 'expo-router'
+import { ActivityIndicator, Image, Text, View } from 'react-native'
 import { icons } from '@/constants/icons'
+import { useAuth } from '@/hooks/useAuth'
 
 interface PropTypes {
     title: string,
@@ -32,6 +32,14 @@ const TabIcon = ({ title, icon, focused }: PropTypes) => {
 }
 
 const _layout = () => {
+    const { session, isLoading } = useAuth();
+    if (!session) return <Redirect href="/login" />
+    if (isLoading) return (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <ActivityIndicator size="large" />
+        </View>
+    );
+
     return (
         <Tabs
             screenOptions={{

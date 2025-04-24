@@ -1,19 +1,25 @@
 import React from 'react'
-import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { ActivityIndicator, ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { Controller, useForm } from 'react-hook-form'
 import Input from '@/components/Input'
 import { fields } from '@/constants/login'
 import { FontAwesome } from '@expo/vector-icons'
 import { Link } from 'expo-router'
 import { LoginCredentials } from '@/types/auth'
+import { useAuthActions } from '@/modules/auth/hooks/useAuthActions'
 
 export default function Login() {
     const { handleSubmit, control } = useForm<LoginCredentials>({
         defaultValues: {
-            identifier: '',
+            email: '',
             password: '',
         }
     });
+    const { signIn, isSigningIn } = useAuthActions();
+
+    const handleLogin = (data: any) => {
+        signIn(data)
+    }
 
     return (
         <ScrollView
@@ -41,10 +47,18 @@ export default function Login() {
                 />
             ))}
 
-            <TouchableOpacity className="bg-blue-600 px-6 py-4 rounded-xl mt-4" onPress={handleSubmit((data) => console.log(data))}>
-                <Text className="text-white text-center font-semibold text-base">
-                    Login
-                </Text>
+            <TouchableOpacity
+                disabled={isSigningIn}
+                onPress={handleSubmit((data) => handleLogin(data))}
+                className={`bg-blue-600 px-6 py-4 rounded-xl mt-4 ${isSigningIn ? 'opacity-50' : ''}`}
+            >
+                {isSigningIn ? (
+                    <ActivityIndicator size="small" color="#ffffff" />
+                ) : (
+                    <Text className="text-white text-center font-semibold text-base">
+                        Login
+                    </Text>
+                )}
             </TouchableOpacity>
 
             <Text className="text-center mt-12 text-sm">

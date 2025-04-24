@@ -11,6 +11,9 @@ export const useAuthActions = () => {
 
     const { mutate: signIn, isPending: isSigningIn } = useMutation({
         mutationFn: (payload: SignInWithPasswordCredentials) => login(payload),
+        onSuccess: () => {
+            router.replace('/');
+        },
         onError: (error) => console.log(error)
     });
 
